@@ -14,7 +14,7 @@ var steam = require('steam'),
     dota2GC = new steam.SteamGameCoordinator(bot, 570);
     dota2 = new dota.Dota2Client(bot, user, dota2GC, 570);
 ```
-### How to use your old sentryfile
+### How to use your old sentryfile(to avoid the one week trade limit)
 I just found out that the old sentry file is a `sha1` figerprint of the new sentry
 - load old sentry
 ```
@@ -32,7 +32,7 @@ var onUserUpdateMachineAuth = function onUserUpdateMachineAuth(sentry, callback)
     callback({ sha_file: sentryfile });
 }
 ```
-Test result: old sentrys are accept by steam
+Test result: old sentrys are accept by steam  
 If you find out any problem, feel free to contact with [me](mailto: tjrogertj@gmail.com)
 
 ### Try it out
