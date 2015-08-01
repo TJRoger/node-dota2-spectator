@@ -14,6 +14,27 @@ var steam = require('steam'),
     dota2GC = new steam.SteamGameCoordinator(bot, 570);
     dota2 = new dota.Dota2Client(bot, user, dota2GC, 570);
 ```
+### How to use your old sentryfile
+I just found out that the old sentry file is a `sha1` figerprint of the new sentry
+- load old sentry
+```
+if (fs.existsSync('sentryfile/'+logOnDetails.account_name)){
+    logOnDetails.sha_sentryfile  = fs.readFileSync('sentryfile/' + logOnDetails.account_name);
+    util.log('sentry loaded');
+}
+```
+- update sentry
+```
+var onUserUpdateMachineAuth = function onUserUpdateMachineAuth(sentry, callback){
+    var sentryfile = crypto.createHash('sha1').update(sentry.bytes).digest();
+    fs.writeFileSync('sentryfile/'+config.steam_user, sentryfile);
+     util.log("sentryfile saved");
+     callback({ sha_file: sentryfile });
+}
+```
+Test result: old sentrys are accept by steam
+If you find out any problem, feel free to contact with [me](mailto: tjrogertj@gmail.com)
+
 ### Try it out
 - add your steam username and password in the config.js  
 - add the auth-code from steam after first try to login
