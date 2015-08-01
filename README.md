@@ -28,8 +28,8 @@ if (fs.existsSync('sentryfile/'+logOnDetails.account_name)){
 var onUserUpdateMachineAuth = function onUserUpdateMachineAuth(sentry, callback){
     var sentryfile = crypto.createHash('sha1').update(sentry.bytes).digest();
     fs.writeFileSync('sentryfile/'+config.steam_user, sentryfile);
-     util.log("sentryfile saved");
-     callback({ sha_file: sentryfile });
+    util.log("sentryfile saved");
+    callback({ sha_file: sentryfile });
 }
 ```
 Test result: old sentrys are accept by steam
