@@ -15,7 +15,7 @@ var steam = require('steam'),
     dota2 = new dota.Dota2Client(bot, user, dota2GC, 570);
 ```
 ### How to use your old sentryfile(to avoid the one week trade limit)
-I just found out that the old sentry file is a `sha1` figerprint of the new sentry
+I just found out that the old sentry file is a `sha1` fingerprint of the new sentry
 - load old sentry
 ```
 if (fs.existsSync('sentryfile/'+logOnDetails.account_name)){
