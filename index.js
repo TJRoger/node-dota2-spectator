@@ -157,6 +157,7 @@ Dota2Client.prototype.findSourceTVGames = function(filterOptions, callback) {
     callback);
 };
 
+/*
 Dota2Client.prototype.findTopSourceTVGames = function(filterOptions, callback) {
     callback = callback || null;
     debuglog('sending league search request');
@@ -167,7 +168,7 @@ Dota2Client.prototype.findTopSourceTVGames = function(filterOptions, callback) {
     new Dota2.CMsgFindSourceTVGames(filterOptions).toBuffer(),
     callback);
 };
-
+*/
 
 
 //handlers
@@ -185,7 +186,7 @@ handlers[Dota2.EDOTAGCMsg.k_EMsgGCSourceTVGamesResponse] = function onSourceTVGa
         if (callback) callback(sourceTVGamesResponse.result, sourceTVgamesResponse);
     }
 };
-
+/*
 handlers[Dota2.EDOTAGCMsg.k_EMsgGCSourceTVGamesResponse] = function onGCToClientFindTopSourceTVGamesResponse(message, callback) {
     callback = callback || null;
     var topSourceTVGamesResponse = Dota2.CMsgGCToClientFindTopSourceTVGamesResponse.parse(message);
@@ -197,7 +198,7 @@ handlers[Dota2.EDOTAGCMsg.k_EMsgGCSourceTVGamesResponse] = function onGCToClient
         if (callback) callback(topSourceTVGamesResponse.result, topSourceTVGamesResponse);
     }
 };
-
+*/
 
 
 handlers[Dota2.EGCBaseClientMsg.k_EMsgGCClientWelcome] = function clientWelcomeHandler(message) {
