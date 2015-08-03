@@ -52,7 +52,10 @@ if (fs.existsSync('sentryfile/'+logOnDetails.account_name)){
 else if(config.steam_guard_code !=''){
 	logOnDetails.auth_code = config.steam_guard_code;
 }
-
+if (!logOnDetails.account_name || !logOnDetails.password){
+    util.log('no username or password supplied');
+    return;
+}
 bot.connect();
 util.log('Bot is trying to connect to steam network...');
 /* Steam logic */
