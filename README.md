@@ -33,7 +33,7 @@ var onUserUpdateMachineAuth = function onUserUpdateMachineAuth(sentry, callback)
 }
 ```
 Test result: old sentrys are accept by steam  
-If you find out any problem, feel free to contact with [me](mailto: tjrogertj@gmail.com)
+If you find out any problem, feel free to contact with [me](mailto: tjrogertj@gmail.com) or open an issue.
 
 ### Try it out
 - add your steam username and password in the config.js  
