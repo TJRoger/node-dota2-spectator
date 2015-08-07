@@ -81,13 +81,13 @@ var Dota2Client = function Dota2Client(steamClient, steamUser, dota2GC, appid) {
             return;
         }
         if(self._gcClientHelloCount > 10){
-            debuglog('ClientHello has taken longer than 30 seconds! Reporting timeout...');
+            console.log('ClientHello has taken longer than 30 seconds! Reporting timeout...');
             self._gcClientHelloCount = 0;
             self.emit("hellotimeout");
         }
         debuglog('Sending ClientHello');
         if(!self._gc){
-            util.log('Where the fuck is _gc');
+            console.log('Where the fuck is _gc');
         }else {
             self._gc.send({
                 msg: Dota2.EGCBaseClientMsg.k_EMsgGCClientHello,
