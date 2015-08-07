@@ -47,9 +47,6 @@ Dota2._processProto = function(proto) {
     return proto;
 }
 
-if(Dota2 == schema)
-    debuglog('Dota2 is equal to schema');
-
 var Dota2Client = function Dota2Client(steamClient, steamUser, dota2GC, appid) {
     EventEmitter.call(this);
 
@@ -89,8 +86,8 @@ var Dota2Client = function Dota2Client(steamClient, steamUser, dota2GC, appid) {
             self.emit("hellotimeout");
         }
         debuglog('Sending ClientHello');
-        if(!self._client){
-            util.log('Where the fuck is _client');
+        if(!self._gc){
+            util.log('Where the fuck is _gc');
         }else {
             self._gc.send({
                 msg: Dota2.EGCBaseClientMsg.k_EMsgGCClientHello,
@@ -142,7 +139,7 @@ Dota2Client.prototype.exit = function() {
   
   if(this._client.loggedOn) {
   	this._user.gamesPlayed([]);
-  	debuglog('Exited Dota2, Goodby!');
+    console.log('Exited Dota2, Goodby!');
   }
 }
 
