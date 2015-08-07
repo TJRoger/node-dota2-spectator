@@ -67,28 +67,7 @@ var onSteamConnected = function onSteamConnected(){
 
 function deepLog(object, filename){
     util.log(util.inspect(object, false, null));
-    writeFile(filename, JSON.stringify(object));
-}
-
-function writeFile(filepath, file){
-    var fileExist = true;
-    var filetype = "." + filepath.split('.').pop();
-    var filepath = filepath - filetype;
-    var fileNumber = 1;
-    while(fileExist){
-        fileNumber_str = fileNumber.toString(); 
-        var current = filename + fileNumber_str + filetype;
-        if (fs.existsSync(__dirname + "/tmp/" + current)) {
-            fileNumber++;
-        } else {
-            var newPath = __dirname + "/tmp/" + current;
-            fs.writeFile(newPath, file, function (err) {
-                util.log('file saved');
-            });
-            break;
-        }
-    }
-
+    //writeFile(filename, JSON.stringify(object));
 }
 
 var onSteamLogOnResponse = function onSteamLogOnResponse(logOnResponse){
