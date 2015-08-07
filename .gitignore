@@ -1,3 +1,4 @@
-node_modules/
-sentryfile/
+sentryfile
 node_modules
+config.js
+severs
