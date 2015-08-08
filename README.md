@@ -2,7 +2,7 @@
 A node-steam plugin for Dota 2 Spectator Client. Spectate dota2 games  
 ## How to install
 - download the package to your working directory
-- run `npm install` in the `node-dota2-spectator` directory
+- run `npm install steam` && `npm install` in the `node-dota2-spectator` directory
  
 ## How to use
 ### Initialiaztion
