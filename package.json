@@ -1,6 +1,6 @@
 {
   "name": "node-dota2-spectator",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "dependencies": {
       "protobufjs": "4.0.0",
       "bignumber.js": "2.0.7"

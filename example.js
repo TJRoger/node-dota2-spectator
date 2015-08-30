@@ -118,11 +118,26 @@ var onFriendsChatInvite = function onFriendsChatInvite(chatRoomID, chatRoomName,
     console.log(chatRoomID);
 }
 
+var finished = true;
 var onFriendsMessage = function onFriendsMessage(source, message, type, chatter){
 	// respond to both chat room and private messages
     if (type == 1) //1, message; 2, tying
-        if(friends.personaStates[source] != undefined)
+        if(friends.personaStates[source] != undefined){
         console.log('Received message: ' +message+' from '+friends.personaStates[source].player_name);
+        if(finished){
+                finished = false;
+        var rl = require('readline').createInterface({
+                    input: process.stdin,
+                    ouput: process.stdout
+            });
+                rl.question("What do you want to say to "+friends.personaStates[source].player_name ,function(answer){
+                    //console.log(answer);
+                    friends.sendMessage(source, answer, steam.EChatEntryType.ChatMsg);
+                    finished = true;
+                    rl.close();
+                });
+            }
+        }
         else
             console.log('Received message: ' +message);
         //console.log(util.inspect(steam.EChatEntryType, false, null));
@@ -148,7 +163,7 @@ var onDota2GCMessage = function onDota2GCMessage(header, body, callback){
     //deepLog(header, 'header');
     //deepLog(body, 'body');
     //deepLog(callback, 'callback');
-    util.log('dota2.js received :'+header.msg);
+    util.log('example.js received :'+header.msg);
     //debuglog(body, 'body');
 }
 
@@ -169,7 +184,8 @@ var onDota2Message = function onDota2Message(header, body, callback){
 var onDota2ClientWelcome = function onDota2ClientWelcome(){
     util.log('Welcome to play Dota2!');
 
-    setTimeout(dota2.findSourceTVGames({leagueid: 2733}),1000);
+    setTimeout(dota2.findSourceTVGames({'search_key': '', 'start': 0, 'num_games': 1,'leagueid': 2733}),1000);
+    dota2.spectateFriendGame({'steam_id': 76561198063164570});
     /*
      * dota2.joinChatChannel({
         channel_name: 'Node.js',

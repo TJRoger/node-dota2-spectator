@@ -16,7 +16,7 @@ var EventEmitter = require('events').EventEmitter,
     Dota = exports;
 
 var debug = false;
-function debuglog(foo,foodes){
+var debuglog = function debuglog(foo,foodes){
 	if (debug == true){
         if(foodes){
 		    util.log(foodes+': ');
@@ -143,17 +143,6 @@ Dota2Client.prototype.exit = function() {
   }
 }
 
-Dota2Client.prototype.findSourceTVGames = function(filterOptions, callback) {
-    callback = callback || null;
-    debuglog('send league search request');
-    this._gc.send({
-        msg:  Dota2.EDOTAGCMsg.k_EMsgGCFindSourceTVGames,
-        proto: {}
-    },
-    new Dota2.CMsgFindSourceTVGames(filterOptions).toBuffer(),
-    callback);
-};
-
 /*
 Dota2Client.prototype.findTopSourceTVGames = function(filterOptions, callback) {
     callback = callback || null;
@@ -172,17 +161,6 @@ Dota2Client.prototype.findTopSourceTVGames = function(filterOptions, callback) {
 var handlers = Dota2Client.prototype._handlers = {};
 
 
-handlers[Dota2.EDOTAGCMsg.k_EMsgGCSourceTVGamesResponse] = function onSourceTVGamesResponse(message, callback) {
-    callback = callback || null;
-    var sourceTVGamesResponse = Dota2.CMsgSourceTVGamesResponse.parse(message);
-    if (typeof sourceTVGamesResponse.games != 'undefined' && sourceTVGamesResponse.games.length > 0) {
-        debuglog('Received SourceTV games data');
-        if (callback) callback(sourceTVGamesResponse);
-    }else {
-        debuglog('Received a bad SourceTV games response');
-        if (callback) callback(sourceTVGamesResponse.result, sourceTVgamesResponse);
-    }
-};
 /*
 handlers[Dota2.EDOTAGCMsg.k_EMsgGCSourceTVGamesResponse] = function onGCToClientFindTopSourceTVGamesResponse(message, callback) {
     callback = callback || null;
@@ -252,5 +230,10 @@ handlers[Dota2.EGCBaseClientMsg.k_EMsgGCClientConnectionStatus] = function gcCli
 }
 
 debuglog(handlers, 'handlers');
+Dota.Dota2 = Dota2;
+Dota.debug = debug;
+Dota.debuglog = debuglog;
 
 Dota.Dota2Client = Dota2Client;
+
+require('./handlers/sourcetv')
