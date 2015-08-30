@@ -1,4 +1,6 @@
 # node dota2 spectator  
+[![NPM version](https://img.shields.io/npm/v/node-dota2-spectator.svg)](https://www.npmjs.com/package/node-dota2-spectator "View this project on NPM")
+[![Dependency Status](https://img.shields.io/david/tjroger/node-dota2-spectator.svg)](https://david-dm.org/tjroger/node-dota2-spectator)  
 A node-steam plugin for Dota 2 Spectator Client. Spectate dota2 games  
 ## How to install
 - download the package to your working directory
