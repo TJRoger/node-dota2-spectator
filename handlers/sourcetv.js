@@ -14,11 +14,11 @@ var Dota = require('../index')
     debug = Dota.debug,
     debuglog = Dota.debuglog,
     Dota2 = Dota.Dota2,
-    ProtoBuf = require("protobufjs"),
-    base_gcmessages = ProtoBuf.loadProtoFile(path.join(__dirname, '/../resources/protobufs/dota/base_gcmessages.proto')).build(),
-    gcsdk_gcmessages = ProtoBuf.loadProtoFile(path.join(__dirname, '/../resources/protobufs/dota/gcsdk_gcmessages.proto')).build(),
-    dota_gcmessages_client = ProtoBuf.loadProtoFile(path.join(__dirname, '/../resources/protobufs/dota/dota_gcmessages_client.proto')).build(),
-    protoMask = 0x80000000;
+//    ProtoBuf = require("protobufjs"),
+//    base_gcmessages = ProtoBuf.loadProtoFile(path.join(__dirname, '/../resources/protobufs/dota/base_gcmessages.proto')).build(),
+//    gcsdk_gcmessages = ProtoBuf.loadProtoFile(path.join(__dirname, '/../resources/protobufs/dota/gcsdk_gcmessages.proto')).build(),
+//    dota_gcmessages_client = ProtoBuf.loadProtoFile(path.join(__dirname, '/../resources/protobufs/dota/dota_gcmessages_client.proto')).build(),
+//    protoMask = 0x80000000;
 
 //Methods
 Dota.Dota2Client.prototype.findSourceTVGames = function(filterOptions, callback){
