@@ -1,9 +1,10 @@
-# node dota2 spectator  
+# Node Dota2 Spectator  
 [![NPM version](https://img.shields.io/npm/v/node-dota2-spectator.svg)](https://www.npmjs.com/package/node-dota2-spectator "View this project on NPM")
 [![Build Status](https://img.shields.io/travis/tjroger/node-dota2-spectator/master.svg)](https://travis-ci.org/tjroger/node-dota2-spectator)
 [![Code Climate](https://codeclimate.com/github/TJRoger/node-dota2-spectator/badges/gpa.svg)](https://codeclimate.com/github/TJRoger/node-dota2-spectator)
 [![Dependency Status](https://img.shields.io/david/tjroger/node-dota2-spectator.svg)](https://david-dm.org/tjroger/node-dota2-spectator)
-[![PayPal donate button](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=224D8E2ZAKV2A&item_name=node%2ddota2%2dspectator&currency_code=USD)  
+[![PayPal donate button](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=224D8E2ZAKV2A&item_name=node%2ddota2%2dspectator&currency_code=USD)
+[![支付宝捐助按钮](https://img.shields.io/badge/%E6%94%AF%E4%BB%98%E5%AE%9D-%E5%90%91TA%E6%8D%90%E5%8A%A9-yellow.svg)](http://rotk.tk)  
 A node-steam plugin for Dota 2 Spectator Client. Spectate dota2 games  
 ## How to install
 - download the package to your working directory
