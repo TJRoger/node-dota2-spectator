@@ -40,7 +40,7 @@ If you find out any problem, feel free to contact with [me](mailto: tjrogertj@gm
 - add the auth-code from steam after first try to login
 - then you can login from now on
 
-refer to the `example.js` for more
+refer to the [`example.js`](example.js) for more
 ### How to extend
 Write a `handler`.js then import it to the `index.js` 
 ## license
