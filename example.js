@@ -124,7 +124,7 @@ var onFriendsChatInvite = function onFriendsChatInvite(chatRoomID, chatRoomName,
 var finished = true;
 var onFriendsMessage = function onFriendsMessage(source, message, type, chatter){
 	// respond to both chat room and private messages
-    if (type == 1) //1, message; 2, tying
+    if (type == 1) //1, message; 2, typing
         if(friends.personaStates[source] != undefined){
         console.log('Received message: ' +message+' from '+friends.personaStates[source].player_name);
         if(finished){
