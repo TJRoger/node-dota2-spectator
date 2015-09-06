@@ -11,13 +11,12 @@ var EventEmitter = require('events').EventEmitter,
     util = require('util'),
     path = require('path'),
     ProtoBuf = require('protobufjs'),
-    bignumber = require('bignumber.js'),
-    protoMask = 0x80000000,
+    //bignumber = require('bignumber.js'),
+    //you may need bignumber to support the 64bit steam id if your computer doesn't
     Dota = exports;
 
-var debug = false;
 var debuglog = function debuglog(foo,foodes){
-	if (debug == true){
+	if (this.debug){
         if(foodes){
 		    util.log(foodes+': ');
 	    }
@@ -34,7 +33,7 @@ var builder = ProtoBuf.newBuilder();
 builder = ProtoBuf.loadProtoFile(path.join(__dirname, '/resources/protobufs/dota/dota_gcmessages_client.proto'), builder);
 ProtoBuf.loadProtoFile(path.join(__dirname, '/resources/protobufs/dota/gcsdk_gcmessages.proto'), builder);
 ProtoBuf.loadProtoFile(path.join(__dirname, '/resources/protobufs/dota/gcsystemmsgs.proto'), builder);
-var schema = Dota2 = builder.build();
+var Dota2 = builder.build();
 
 
 Dota2._processProto = function(proto) {
@@ -47,13 +46,14 @@ Dota2._processProto = function(proto) {
     return proto;
 }
 
-var Dota2Client = function Dota2Client(steamClient, steamUser, dota2GC, appid) {
+var Dota2Client = function Dota2Client(user, gc, debug) {
     EventEmitter.call(this);
 
-    this._client = steamClient;
-    this._user = steamUser;
-    this._gc = dota2GC;
-    this._appid = appid || 570;
+    this.debug = debug;
+    this._client = user._client;
+    this._user = user;
+    this._gc = gc;
+    this._appid = gc._appid || 570;
     this._gcReady = false;
     this._gcClientHelloIntervalId = null;
     this._gcConnectionStatus = Dota2.GCConnectionStatus.GCConnectionStatus_NO_SESSION;
@@ -104,18 +104,29 @@ util.inherits(Dota2Client, EventEmitter);
 //Dota2._handlers = {};
 Dota2Client.methods = {};
 Dota2Client.events = {};
+//util.log(Dota2);
+//console.log('_____________________________________________________________');
 
+//require('./resources/messages');
+
+//Expose enums
+Dota2Client.prototype.ServerRegion = Dota2.ServerRegion;
+Dota2Client.prototype.GameMode = Dota2.GameMode;
+
+//util.log(Dota2);
 //methods
 Dota2Client.prototype.ToAccountID = function(steamid){
-    return new bignumber(steamid).minus('76561197960265728')-0;
+    return steamid - 76561197960265728;
+    //return new bignumber(steamid).minus('76561197960265728')-0;
 }
 
 Dota2Client.prototype.ToSteamID = function(accid){
-    return new bignumber(accid).plus('76561197960265728')+"";
+    return accid+76561197960265728;
+    //return new bignumber(accid).plus('76561197960265728')+"";
 }
 
 Dota2Client.prototype.launch = function(){
-    debuglog('Lauching Dota 2');
+    util.log('Lauching Dota 2');
     this.AccountID = this.ToAccountID(this._client.steamID);
     this.Party = null;
     this.Lobby = null;
@@ -128,7 +139,7 @@ Dota2Client.prototype.launch = function(){
 
 Dota2Client.prototype.exit = function() {
   /* Reports to Steam we are not running any apps. */
-  debuglog("Exiting Dota 2");
+  util.log("Exiting Dota 2");
 
   /* stop knocking if exit comes before ready event */
   if (this._gcClientHelloIntervalId) {
@@ -185,7 +196,7 @@ handlers[Dota2.EGCBaseClientMsg.k_EMsgGCClientWelcome] = function clientWelcomeH
     this._gcClientHelloIntervalId = null;
   }
 
-  debuglog("Received client welcome.");
+  util.log("Received client welcome.");
 
   // Parse any caches
   this._gcReady = true;
@@ -229,11 +240,10 @@ handlers[Dota2.EGCBaseClientMsg.k_EMsgGCClientConnectionStatus] = function gcCli
   }
 }
 
-debuglog(handlers, 'handlers');
-Dota.Dota2 = Dota2;
-Dota.debug = debug;
-Dota.debuglog = debuglog;
 
 Dota.Dota2Client = Dota2Client;
+
+Dota.Dota2 = Dota2;
+Dota.debuglog = debuglog;
 
 require('./handlers/sourcetv')

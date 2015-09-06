@@ -1,5 +1,5 @@
 //
-//  dota2.js
+//  example.js
 //  dota2 spectator
 //
 //  Created by Roger (betterservant@gmail.com) on 07/28/15.
@@ -18,22 +18,24 @@ var user = new steam.SteamUser(bot);
 var friends = new steam.SteamFriends(bot);
 var trading = new steam.SteamTrading(bot);
 var dota2GC = new steam.SteamGameCoordinator(bot, 570);
-var dota2 = new dota.Dota2Client(bot, user, dota2GC, 570);
-
+var dota2 = new dota.Dota2Client(user, dota2GC, true);
+//util.log(dota2GC);
 global.config = require('./config');
 
-var debug = true;
+//var debuglog = dota.debuglog;
+//var debug = true;
+/*
 function debuglog(foo,foodes){
-        if(foodes){
-                    util.log(foodes+': ');
-                        }
-            if (debug == true && typeof foo == 'object') {
-                        util.log(util.inspect(foo, false, null));
-                            }else {
-                                        util.log(foo);
-                                            }
+    if(foodes){
+        util.log(foodes+': ');
+    }
+    if (debug == true && typeof foo == 'object') {
+        util.log(util.inspect(foo, false, null));
+    }else {
+        util.log(foo);
+    }
 }
-
+*/
 // if we've saved a server list, use it
 if (fs.existsSync('servers')) {
 	  steam.servers = JSON.parse(fs.readFileSync('servers'));
@@ -47,6 +49,7 @@ var logOnDetails = {
 if (fs.existsSync('sentryfile/'+logOnDetails.account_name)){ 
 	var file = fs.readFileSync('sentryfile/' + logOnDetails.account_name);
     logOnDetails.sha_sentryfile = crypto.createHash('sha1').update(file).digest();
+    //util.log('sentry loaded');
     util.log('sentry loaded');
 }
 else if(config.steam_guard_code !=''){
@@ -73,13 +76,13 @@ function deepLog(object, filename){
 var onSteamLogOnResponse = function onSteamLogOnResponse(logOnResponse){
 	if(logOnResponse.eresult == steam.EResult.OK) {
 		util.log('Bot logged in!');
-		friends.setPersonaState(steam.EPersonaState.LookingToPlay);
+		friends.setPersonaState(steam.EPersonaState.Snooze);
 		//bot.setPersonaName('BOT<Deep Blue>');
         friends.joinChat('103582791434333751');
 		// the group's SteamID as a string
 		util.log('As '+bot.steamID);
         dota2.launch();
-        //dota2.exit();
+        setTimeout(function(){dota2.exit()}, 5000);
         util.log(dota2.AccountID);
         //util.log(util.inspect(dota2, false, null));
         //dota2.findSourceTVGames({'leagueid': 2773});
@@ -163,7 +166,7 @@ var onDota2GCMessage = function onDota2GCMessage(header, body, callback){
     //deepLog(header, 'header');
     //deepLog(body, 'body');
     //deepLog(callback, 'callback');
-    util.log('example.js received :'+header.msg);
+    util.log('example.js received message:'+header.msg);
     //debuglog(body, 'body');
 }
 
@@ -184,7 +187,7 @@ var onDota2Message = function onDota2Message(header, body, callback){
 var onDota2ClientWelcome = function onDota2ClientWelcome(){
     util.log('Welcome to play Dota2!');
 
-    setTimeout(dota2.findSourceTVGames({'search_key': '', 'start': 0, 'num_games': 1,'leagueid': 2733}),1000);
+    dota2.findSourceTVGames({'search_key': '', 'start': 0, 'num_games': 1,'leagueid': 2733});
     dota2.spectateFriendGame({'steam_id': 76561198063164570});
     /*
      * dota2.joinChatChannel({

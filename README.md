@@ -15,8 +15,8 @@ var steam = require('steam'),
     dota = require('dota'),
     bot = new steam.SteamClient(),
     user = new steam.SteamUser(bot),
-    dota2GC = new steam.SteamGameCoordinator(bot, 570);
-    dota2 = new dota.Dota2Client(bot, user, dota2GC, 570);
+    gc = new steam.SteamGameCoordinator(bot, 570);
+    dota2 = new dota.Dota2Client(user, gc, true);
 ```
 ### How to use your old sentryfile(to avoid the one week trade limit)
 I just found out that the old sentry file is a `sha1` fingerprint of the new sentry
