@@ -20,8 +20,9 @@ var trading = new steam.SteamTrading(bot);
 var dota2GC = new steam.SteamGameCoordinator(bot, 570);
 var dota2 = new dota.Dota2Client(user, dota2GC, true);
 //util.log(dota2GC);
-global.config = require('./config');
 
+/* global config */
+global.config = require('./config');
 //var debuglog = dota.debuglog;
 //var debug = true;
 /*
@@ -57,7 +58,7 @@ else if(config.steam_guard_code !=''){
 }
 if (!logOnDetails.account_name || !logOnDetails.password){
     util.log('no username or password supplied');
-    return;
+    process.exit(1);
 }
 bot.connect();
 util.log('Bot is trying to connect to steam network...');
@@ -129,10 +130,10 @@ var onFriendsMessage = function onFriendsMessage(source, message, type, chatter)
         console.log('Received message: ' +message+' from '+friends.personaStates[source].player_name);
         if(finished){
                 finished = false;
-        var rl = require('readline').createInterface({
+                var rl = require('readline').createInterface({
                     input: process.stdin,
                     ouput: process.stdout
-            });
+                });
                 rl.question("What do you want to say to "+friends.personaStates[source].player_name ,function(answer){
                     //console.log(answer);
                     friends.sendMessage(source, answer, steam.EChatEntryType.ChatMsg);
