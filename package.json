@@ -2,7 +2,7 @@
   "name": "node-dota2-spectator",
   "version": "0.3.0",
   "dependencies": {
-      "protobufjs": "4.0.0",
+      "protobufjs": "6.8.8",
       "bignumber.js": "2.0.7"
   },
   "peerDependencies": {
